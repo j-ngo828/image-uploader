@@ -1,0 +1,22 @@
+.uploadButton {
+  width: 101px;
+  height: 31.98px;
+  background: #2f80ed;
+  border: none;
+  border-radius: 8px;
+
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: -0.035em;
+
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.uploadButton:hover {
+  opacity: 0.5;
+}
