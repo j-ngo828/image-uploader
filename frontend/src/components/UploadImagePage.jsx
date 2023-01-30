@@ -58,18 +58,13 @@ function UploadImagePage(props) {
             alt="Image upload drag and drop"
             src="../logo.svg"
           ></input>
-          <label className="imageUploadLabel" for="image">
+          <label className="imageUploadLabel" htmlFor="image">
             Drag & Drop your image here
           </label>
         </div>
 
         <p>Or</p>
-        <Button
-          onClick={(event) => {
-            document.getElementById("fileUpload").click();
-            document.getElementById("fileUpload").onchange = handleImageUpload;
-          }}
-        />
+        <Button onClick={handleImageUpload} />
       </div>
     </div>
   );

@@ -9,15 +9,12 @@ const Button = (props) => {
         id="fileUpload"
         type="file"
         accept="image/png, image/jpeg, image/jpg"
+        onChange={props.onClick}
         hidden
       />
-      <button
-        className={`${props.className} uploadButton`}
-        type="button"
-        onClick={props.onClick}
-      >
+      <label htmlFor="fileUpload" className={`${props.className} uploadButton`}>
         Choose a file
-      </button>
+      </label>
     </React.Fragment>
   );
 };

@@ -1,8 +1,10 @@
 .uploadButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 101px;
   height: 31.98px;
   background: #2f80ed;
-  border: none;
   border-radius: 8px;
 
   font-family: "Noto Sans";
