@@ -1,7 +1,7 @@
-import React, { Component, useRef, useState } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import Button from "./Button.jsx";
 import "./UploadImagePage.css";
-import axios from "axios";
 
 const getCookie = (name) => {
   let cookieValue = null;
@@ -21,32 +21,23 @@ const getCookie = (name) => {
 
 function UploadImagePage(props) {
   const [file, setFile] = useState([]);
-  const apiURL = "http://localhost:8000/api/uploadimage/";
+
+  const apiURL = "/api/uploadimage/";
+
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    // setFile([...file, file]);
+    setFile([file]);
+    const formData = new FormData();
     try {
-      reader.onload = async () => {
-        const image = reader.result;
-        // do network request down here
-        const csrfToken = getCookie("csrftoken");
-        await axios.post(
-          apiURL,
-          { image },
-          {
-            headers: {
-              "Content-type": "application/json",
-              "X-CSRFToken": csrfToken,
-              // 'Access-Control-Allow-Origin': '*',
-              // 'Content-Type': 'application/json',
-            },
-          }
-        );
-        //   .then((res) => setFile([...file, res.image]))
-        //   .catch((err) => console.log(err));
-      };
+      // do network request down here
+      formData.append("image", file, file.name);
+      const csrfToken = getCookie("csrftoken");
+      await axios.post(apiURL, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+          "X-CSRFToken": csrfToken,
+        },
+      });
     } catch (error) {
       // prints message here
       window.alert("Please upload a PNG, JPEG File or JPG File!");

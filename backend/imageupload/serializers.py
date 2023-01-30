@@ -11,12 +11,13 @@ class ImageUploadSerializer(serializers.Serializer):
         return ImageUpload.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.image = validated_data.get('image', instance.image)
+        instance.image = validated_data.get("image", instance.image)
         instance.save()
         return instance
 
     # class Meta:
     #     model = ImageUpload
-    #     fields = ['image']  
+    #     fields = ['image']
+
 
 # {"image":"image field"}
