@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Button from "./Button.jsx";
+import checkmark from "./check.svg";
+import LoadingCard from "./LoadingCard.jsx";
 import "./UploadImagePage.css";
 
 const getCookie = (name) => {
@@ -20,52 +22,73 @@ const getCookie = (name) => {
 };
 
 function UploadImagePage(props) {
-  const [file, setFile] = useState([]);
+  const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const apiURL = "/api/uploadimage/";
 
-  const handleImageUpload = async (event) => {
-    const file = event.target.files[0];
-    setFile([file]);
+  const handleImageUpload = (event) => {
+    setIsLoading(true);
+    const image = event.target.files[0];
     const formData = new FormData();
     try {
       // do network request down here
-      formData.append("image", file, file.name);
+      formData.append("image", image, image.name);
       const csrfToken = getCookie("csrftoken");
-      await axios.post(apiURL, formData, {
-        headers: {
-          "Content-type": "multipart/form-data",
-          "X-CSRFToken": csrfToken,
-        },
-      });
+      axios
+        .post(apiURL, formData, {
+          headers: {
+            "Content-type": "multipart/form-data",
+            "X-CSRFToken": csrfToken,
+          },
+        })
+        .then((response) => {
+          setImage({ image: response.data.image });
+          setTimeout(() => setIsLoading(false), 3000);
+        });
     } catch (error) {
       // prints message here
       window.alert("Please upload a PNG, JPEG File or JPG File!");
     }
   };
 
-  return (
+  return isLoading ? (
+    <LoadingCard />
+  ) : (
     <div className="imageUploader">
-      <div className="header">
-        <h2 className="title">Upload your Image</h2>
-        <p className="helpText">File should be Jpeg, Png, ...</p>
-      </div>
-      <div className="imageUploadPrompt">
-        <div className="dragDropImage">
-          <input
-            type="image"
-            id="image"
-            alt="Image upload drag and drop"
-            src="../logo.svg"
-          ></input>
-          <label className="imageUploadLabel" htmlFor="image">
-            Drag & Drop your image here
-          </label>
+      {image ? (
+        <div className="successfulUpload">
+          <img src={checkmark} alt="green checkmark" className="checkMark" />
+          <p className="successText">Uploaded Successfully!</p>
+          <img src={image.image} alt="preview" className="imagePreview" />
+          <div className="copyLink">
+            <p>{image.image}</p>
+          </div>
         </div>
+      ) : (
+        <React.Fragment>
+          <div className="header">
+            <h2 className="title">Upload your Image</h2>
+            <p className="helpText">File should be Jpeg, Png, ...</p>
+          </div>
+          <div className="imageUploadPrompt">
+            <div className="dragDropImage">
+              <input
+                type="image"
+                id="image"
+                alt="Image upload drag and drop"
+                src="../logo.svg"
+              ></input>
+              <label className="imageUploadLabel" htmlFor="image">
+                Drag & Drop your image here
+              </label>
+            </div>
 
-        <p>Or</p>
-        <Button onClick={handleImageUpload} />
-      </div>
+            <p>Or</p>
+            <Button onClick={handleImageUpload} />
+          </div>
+        </React.Fragment>
+      )}
     </div>
   );
 }

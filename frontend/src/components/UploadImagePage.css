@@ -95,3 +95,71 @@
   /* Gray 4 */
   color: #bdbdbd;
 }
+
+.successfulUpload .checkMark {
+  margin: 39.5px auto 11.3px auto;
+}
+
+.successfulUpload .successText {
+  width: 198px;
+  height: 27px;
+
+  margin: 0 auto;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: -0.035em;
+
+  /* Gray 2 */
+
+  color: #4f4f4f;
+}
+
+.successfulUpload .imagePreview {
+  width: 338px;
+  height: 224.4px;
+
+  margin: 25.34px auto;
+
+  border-radius: 12px;
+}
+
+.successfulUpload .copyLink {
+  display: flex;
+  justify-content: flex-start;
+  width: 338px;
+  height: 34px;
+  margin: 0 auto;
+  margin-bottom: 33.35px;
+  overflow: hidden;
+  background: #f6f8fb;
+  /* Gray 5 */
+
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.successfulUpload .copyLink p {
+  display: inline-flex;
+  text-align: start;
+  width: 240px;
+  height: 12px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 12px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: -0.035em;
+
+  /* Gray 2 */
+
+  color: #4f4f4f;
+}
