@@ -22,12 +22,12 @@ const getCookie = (name) => {
 };
 
 function UploadImagePage(props) {
-  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const apiURL = "/api/uploadimage/";
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event) => {
     setIsLoading(true);
     const image = event.target.files[0];
     const formData = new FormData();
@@ -35,20 +35,30 @@ function UploadImagePage(props) {
       // do network request down here
       formData.append("image", image, image.name);
       const csrfToken = getCookie("csrftoken");
-      axios
-        .post(apiURL, formData, {
-          headers: {
-            "Content-type": "multipart/form-data",
-            "X-CSRFToken": csrfToken,
-          },
-        })
-        .then((response) => {
-          setImage({ image: response.data.image });
-          setTimeout(() => setIsLoading(false), 3000);
-        });
+      const response = await axios.post(apiURL, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+      setImageUrl(response.data.image);
+      setTimeout(() => setIsLoading(false), 3500);
     } catch (error) {
       // prints message here
       window.alert("Please upload a PNG, JPEG File or JPG File!");
+    }
+  };
+
+  const fetchImage = async (id) => {
+    try {
+      const response = await axios.get(`${apiURL}27/`, {
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+      });
+      setImageUrl(response.data.image);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -56,13 +66,13 @@ function UploadImagePage(props) {
     <LoadingCard />
   ) : (
     <div className="imageUploader">
-      {image ? (
+      {imageUrl ? (
         <div className="successfulUpload">
           <img src={checkmark} alt="green checkmark" className="checkMark" />
           <p className="successText">Uploaded Successfully!</p>
-          <img src={image.image} alt="preview" className="imagePreview" />
+          <img src={imageUrl} alt="preview" className="imagePreview" />
           <div className="copyLink">
-            <p>{image.image}</p>
+            <p>{imageUrl}</p>
           </div>
         </div>
       ) : (

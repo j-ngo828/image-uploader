@@ -122,7 +122,8 @@
 
 .successfulUpload .imagePreview {
   width: 338px;
-  height: 224.4px;
+  max-width: 100%;
+  height: auto;
 
   margin: 25.34px auto;
 
@@ -132,6 +133,7 @@
 .successfulUpload .copyLink {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   width: 338px;
   height: 34px;
   margin: 0 auto;
@@ -156,7 +158,6 @@
   line-height: 12px;
   /* identical to box height */
 
-  text-align: center;
   letter-spacing: -0.035em;
 
   /* Gray 2 */
