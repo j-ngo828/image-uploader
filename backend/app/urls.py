@@ -22,7 +22,7 @@ from rest_framework import routers
 
 # register the router
 router = routers.DefaultRouter()
-router.register(r"uploadimage", views.ImageUploadViewSet)
+router.register(r"images", views.ImageUploadViewSet, basename="image")
 
 # add url paths
 urlpatterns = [

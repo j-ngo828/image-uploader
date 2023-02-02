@@ -21,11 +21,11 @@ const getCookie = (name) => {
   return cookieValue;
 };
 
-function UploadImagePage(props) {
+function UploadImagePage() {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiURL = "/api/uploadimage/";
+  const apiURL = "/api/images/";
 
   const handleImageUpload = async (event) => {
     setIsLoading(true);
@@ -41,17 +41,17 @@ function UploadImagePage(props) {
           "X-CSRFToken": csrfToken,
         },
       });
-      setImageUrl(response.data.image);
+      const data = response.data;
+      setImageUrl(data.image);
       setTimeout(() => setIsLoading(false), 3500);
     } catch (error) {
-      // prints message here
-      window.alert("Please upload a PNG, JPEG File or JPG File!");
+      console.log(error.message);
     }
   };
 
   const fetchImage = async (id) => {
     try {
-      const response = await axios.get(`${apiURL}27/`, {
+      const response = await axios.get(`${apiURL}36/`, {
         headers: {
           "X-CSRFToken": getCookie("csrftoken"),
         },

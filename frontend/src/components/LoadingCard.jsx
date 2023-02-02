@@ -1,7 +1,7 @@
 import React from "react";
 import "./LoadingCard.css";
 
-function LoadingCard(props) {
+function LoadingCard() {
   return (
     <div className="loadingCard">
       <span>Uploading...</span>
