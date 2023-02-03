@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { baseUrl } from "../constants.js";
 import Button from "./Button.jsx";
 import checkmark from "./check.svg";
 import LoadingCard from "./LoadingCard.jsx";
 import "./UploadImagePage.css";
+
+const imageApiRoute = `${baseUrl}/images/`;
 
 const getCookie = (name) => {
   let cookieValue = null;
@@ -25,8 +28,6 @@ function UploadImagePage() {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiURL = "/api/images/";
-
   const handleImageUpload = async (event) => {
     setIsLoading(true);
     const image = event.target.files[0];
@@ -35,7 +36,7 @@ function UploadImagePage() {
       // do network request down here
       formData.append("image", image, image.name);
       const csrfToken = getCookie("csrftoken");
-      const response = await axios.post(apiURL, formData, {
+      const response = await axios.post(imageApiRoute, formData, {
         headers: {
           "Content-type": "multipart/form-data",
           "X-CSRFToken": csrfToken,
@@ -49,18 +50,19 @@ function UploadImagePage() {
     }
   };
 
-  const fetchImage = async (id) => {
-    try {
-      const response = await axios.get(`${apiURL}36/`, {
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-      });
-      setImageUrl(response.data.image);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // NOTE: this function is not needed right now
+  // const fetchImage = async (id) => {
+  //   try {
+  //     const response = await axios.get(`${imageApiRoute}36/`, {
+  //       headers: {
+  //         "X-CSRFToken": getCookie("csrftoken"),
+  //       },
+  //     });
+  //     setImageUrl(response.data.image);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return isLoading ? (
     <LoadingCard />
