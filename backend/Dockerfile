@@ -4,8 +4,6 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /usr/app/backend
 
-COPY requirements.txt ./
+COPY . ./
 
 RUN pip install -r requirements.txt
-
-COPY . ./
