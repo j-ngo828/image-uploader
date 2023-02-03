@@ -63,13 +63,17 @@ This application/site was created as a submission to a [DevChallenges](https://d
 
 To clone and run this application you'll need:
 - [Git](https://git-scm.com)
+- [npm](https://nodejs.org/en/download/)
 - [Docker](https://docs.docker.com/get-docker/)
 
 Then on your terminal, run the following from the root of this repository:
 
 ```bash
-# To build the containers
-docker-compose up -d --build 
+# First install frontend dependencies
+npm install
+
+# Then to build the containers
+docker-compose up -d --build
 ```
 
 Navigate to http://localhost:3000 to access the application. Enjoy!
