@@ -65,7 +65,7 @@ To clone and run this application you'll need:
 - [Git](https://git-scm.com)
 - [Docker](https://docs.docker.com/get-docker/)
 
-Then on your terminal, run:
+Then on your terminal, run the following from the root of this repository:
 
 ```bash
 # To build the containers
