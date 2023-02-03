@@ -10,15 +10,16 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app/backend
+      - ./backend:/usr/app/backend
 
   frontend:
     restart: on-failure
     container_name: react-frontend
-    build: ./frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app/frontend
+      - ./frontend:/usr/app/frontend
     command: sh -c "npm start"
-
