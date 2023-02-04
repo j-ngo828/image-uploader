@@ -51,18 +51,20 @@ function UploadImagePage() {
   };
 
   // NOTE: this function is not needed right now
-  // const fetchImage = async (id) => {
-  //   try {
-  //     const response = await axios.get(`${imageApiRoute}36/`, {
-  //       headers: {
-  //         "X-CSRFToken": getCookie("csrftoken"),
-  //       },
-  //     });
-  //     setImageUrl(response.data.image);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const fetchImage = async (id) => {
+    try {
+      const response = await axios.get(`${imageApiRoute}${id}/`, {
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+      });
+      setImageUrl(response.data.image);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // fetchImage(1);
 
   return isLoading ? (
     <LoadingCard />
@@ -74,7 +76,14 @@ function UploadImagePage() {
           <p className="successText">Uploaded Successfully!</p>
           <img src={imageUrl} alt="preview" className="imagePreview" />
           <div className="copyLink">
-            <p>{imageUrl}</p>
+            <p className="imageLink">{imageUrl}</p>
+            <button
+              className="copyLinkToClipboard"
+              type="button"
+              onClick={() => navigator.clipboard.writeText(imageUrl)}
+            >
+              <span className="copyLinkToClipboardText">Copy Link</span>
+            </button>
           </div>
         </div>
       ) : (
@@ -97,7 +106,7 @@ function UploadImagePage() {
             </div>
 
             <p>Or</p>
-            <Button onClick={handleImageUpload} />
+            <Button className="chooseAFile" onClick={handleImageUpload} />
           </div>
         </React.Fragment>
       )}
