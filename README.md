@@ -99,12 +99,12 @@ docker exec -it django-backend /bin/sh -c "python manage.py {command}"
 Alternatively, you can add an alias to your shell:
 
 ```bash
-alias dmd="docker exec --workdir /usr/app/backend django-backend python manage.py"
+alias dmd="docker exec -it django-backend sh -c"
 
-# Then just run management command with: dmd {command}
+# Then just run management command with: dmd "{command}"
 
 ## Example
-dmd help # list all possible management command
+dmd "help" # list all possible management command
 ```
 
 ## Common Issues
