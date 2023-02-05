@@ -7,3 +7,5 @@ WORKDIR /usr/app/backend
 COPY . ./
 
 RUN pip install -r requirements.txt
+
+EXPOSE 8000
