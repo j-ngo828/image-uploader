@@ -93,7 +93,7 @@ docker compose up -d
 - Since our backend server in containerized in Docker. To run Django administrative command such as `makemigrations`, do the following:
 
 ```bash
-docker exec -it django-backend /bin/sh -c "python manage.py {command}"
+docker exec -it django-backend sh -c "python manage.py {command}"
 ```
 
 Alternatively, you can add an alias to your shell:
