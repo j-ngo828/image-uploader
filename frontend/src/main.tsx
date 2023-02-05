@@ -1,6 +1,5 @@
 import App from "@/App.jsx";
 import "@/index.scss";
-import "@/reset.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
 

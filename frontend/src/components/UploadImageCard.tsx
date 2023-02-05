@@ -2,10 +2,11 @@ import checkmark from "@/assets/check.svg";
 import logo from "@/assets/logo.svg";
 import LoadingCard from "@/components/LoadingCard";
 import PrimaryButton from "@/components/PrimaryButton";
+import SuccessfulUpload from "@/components/SuccessfulUpload";
 import "@/components/UploadImageCard.scss";
 import { baseUrl } from "@/constants";
 import axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 
 const imageApiRoute = `${baseUrl}/images/`;
 
@@ -28,6 +29,7 @@ const getCookie = (name: String) => {
 function UploadImagePage(): JSX.Element {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const imageInput = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true);
@@ -39,7 +41,6 @@ function UploadImagePage(): JSX.Element {
     const image = inputFiles[0];
     const formData = new FormData();
     try {
-      // do network request down here
       formData.append("image", image, image.name);
       const csrfToken = getCookie("csrftoken");
       const response = await axios.post(imageApiRoute, formData, {
@@ -58,6 +59,14 @@ function UploadImagePage(): JSX.Element {
       }
       console.log(errorMessage);
     }
+  };
+
+  const handleClick = () => {
+    const element = imageInput.current;
+    if (!element) {
+      return;
+    }
+    element.click();
   };
 
   // NOTE: this function is not needed right now
@@ -85,21 +94,7 @@ function UploadImagePage(): JSX.Element {
   ) : (
     <div className="imageUploader">
       {imageUrl ? (
-        <div className="successfulUpload">
-          <img src={checkmark} alt="green checkmark" className="checkMark" />
-          <p className="successText">Uploaded Successfully!</p>
-          <img src={imageUrl} alt="preview" className="imagePreview" />
-          <div className="copyLink">
-            <p className="imageLink">{imageUrl}</p>
-            <button
-              className="copyLinkToClipboard"
-              type="button"
-              onClick={() => navigator.clipboard.writeText(imageUrl)}
-            >
-              <span className="copyLinkToClipboardText">Copy Link</span>
-            </button>
-          </div>
-        </div>
+        <SuccessfulUpload checkmark={checkmark} imageUrl={imageUrl} />
       ) : (
         <React.Fragment>
           <div className="header">
@@ -119,10 +114,17 @@ function UploadImagePage(): JSX.Element {
               </label>
             </div>
 
-            <p>Or</p>
+            <p className="optionText">Or</p>
+            <input
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              ref={imageInput}
+              onChange={handleImageUpload}
+              hidden
+            />
             <PrimaryButton
               className="chooseAFile"
-              onClick={handleImageUpload}
+              onClick={handleClick}
               text="Choose a file"
             />
           </React.Fragment>

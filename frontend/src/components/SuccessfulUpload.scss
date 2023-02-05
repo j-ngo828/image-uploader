@@ -1,0 +1,98 @@
+.successfulUpload {
+  .checkMark {
+    margin: 39.5px auto 11.3px auto;
+  }
+
+  .successText {
+    width: 198px;
+    height: 27px;
+
+    margin: 0 auto;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+
+    text-align: center;
+    letter-spacing: -0.035em;
+
+    color: #4f4f4f;
+  }
+
+  .imagePreview {
+    width: 338px;
+    max-width: 100%;
+    height: auto;
+
+    margin: 25.34px auto;
+
+    border-radius: 12px;
+  }
+
+  .imageLink {
+    width: 240px;
+    height: 12px;
+    margin-bottom: 0;
+    margin-left: 7px;
+    flex: auto;
+    text-align: start;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 12px;
+
+    letter-spacing: -0.035em;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: #4f4f4f;
+  }
+
+  .copyLinkPill {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 338px;
+    height: fit-content;
+    margin: 0 auto;
+    margin-bottom: 33px;
+    background: #f6f8fb;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+
+  .imageLink {
+    width: 240px;
+    height: 12px;
+    margin-bottom: 0;
+    margin-left: 7px;
+    flex: auto;
+    text-align: start;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 12px;
+
+    letter-spacing: -0.035em;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: #4f4f4f;
+  }
+
+  .copyLinkButton {
+    margin: 2px 2px 2px 14px;
+    font-family: "Poppins";
+    font-size: 8px;
+  }
+}
