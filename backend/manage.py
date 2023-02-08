@@ -14,7 +14,9 @@ def main():
         if os.environ.get("RUN_MAIN") or os.environ.get("WERKZEUG_RUN_MAIN"):
             import debugpy
             debugpy.listen(("0.0.0.0", 5678))
-            debugpy.wait_for_client()
+            # NOTE: Uncomment the line below when debugging with VSCode, it will
+            # wait until debugger attach to continue executing
+            # debugpy.wait_for_client()
             print("Attached!")
 
     try:
