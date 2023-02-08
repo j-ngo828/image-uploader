@@ -1,8 +1,7 @@
 services:
   backend:
     container_name: django-backend
-    command: sh -c "python manage.py migrate &&
-                    python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     build:
       context: ./backend/
       dockerfile: Dockerfile
@@ -20,6 +19,6 @@ services:
     ports:
       - 3000:5173
     volumes:
-      - ./frontend:/appfrontend/
+      - ./frontend:/app/frontend
       - /app/frontend/node_modules
       - /app/frontend/.pnpm-store
