@@ -18,6 +18,7 @@
     "types": [
       "node"
     ],
+    "sourceMap": true,
     "baseUrl": "./",
     "paths": {
       "@/*": [

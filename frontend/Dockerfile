@@ -14,4 +14,4 @@ RUN pnpm install -r --offline
 
 EXPOSE 5173
 
-CMD [ "pnpm", "run", "dev" ]
+CMD [ "pnpm", "dev" ]
