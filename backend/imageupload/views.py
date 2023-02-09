@@ -10,6 +10,8 @@ from .serializers import ImageUploadSerializer
 
 
 class ImageUploadViewSet(viewsets.ModelViewSet):
-    queryset = ImageUpload.objects.all()
     serializer_class = ImageUploadSerializer
     parser_classes = (MultiPartParser, FormParser)
+
+    def get_queryset(self):
+        return ImageUpload.objects.all()
