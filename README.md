@@ -8,15 +8,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://{your-demo-link.your-domain}" target="_blank">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://{your-url-to-the-solution}" target="_blank">
       Solution
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx">
+    <a href="https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx" target="_blank">
       Challenge
     </a>
   </h3>
@@ -85,6 +85,7 @@ To stop the containers and to start the containers after the initial build:
 
 ```bash
 # For stopping and removing the containers created above
+# Use the -v flag to remove the associated volumes
 docker compose down
 
 # For creating and starting the container
@@ -114,13 +115,13 @@ pnpm install
 
 ### Good-to-Know Commands
 
-- Since our backend server in containerized in Docker. To run Django administrative command such as `makemigrations`, do the following:
+Since our backend server in containerized in Docker. To run Django administrative command such as `makemigrations`, do the following from your terminal:
 
 ```bash
 docker exec -it django-backend sh -c "python manage.py {command}"
 ```
 
-Alternatively, you can add an alias to your shell:
+You can add an alias to your shell:
 
 ```bash
 alias dmd="docker exec -it django-backend sh -c"
@@ -130,6 +131,8 @@ alias dmd="docker exec -it django-backend sh -c"
 ## Example
 dmd "help" # list all possible management command
 ```
+
+Alternatively, access the container `django-backend` from Docker Desktop and go to the terminal and run the command from there.
 
 ## Common Issues
 
@@ -146,4 +149,4 @@ pip install -r backend/requirements.txt
 
 Then select the interpreter in `env/bin/`. The issue should disappears.
 
-Note: We assumed you're using MacOS or Linux. For Windows, please find the corresponding command.
+Note: We assumed you're using MacOS or Linux. For Windows, please find the corresponding command for setting up Python virtual environment.
