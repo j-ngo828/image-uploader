@@ -1,5 +1,4 @@
-import React from "react";
-import "./LoadingCard.css";
+import "@/components/LoadingCard.scss";
 
 function LoadingCard() {
   return (

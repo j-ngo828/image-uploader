@@ -1,0 +1,85 @@
+.imageUploader {
+  width: 402px;
+  height: fit-content;
+  background: #ffffff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+
+  .title {
+    margin: 0 auto;
+    margin-top: 36px;
+    margin-bottom: 12px;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: -0.035em;
+
+    color: #4f4f4f;
+  }
+
+  .helpText {
+    margin: 0 auto;
+    margin-bottom: 16px;
+    width: 125px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: -0.035em;
+
+    color: #828282;
+  }
+
+  .dragDropImage {
+    margin: 0 auto;
+    width: 338px;
+    height: 218.9px;
+    background: #f6f8fb;
+    border: 1px dashed #97bef4;
+    border-radius: 12px;
+
+    input {
+      width: 114.13px;
+      height: 88.24px;
+      margin: 0 auto;
+      margin-top: 36px;
+    }
+
+    label {
+      margin: 0 auto;
+      margin-top: 30px;
+      display: block;
+      top: 427.97px;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: -0.035em;
+
+      color: #bdbdbd;
+    }
+  }
+
+  .optionText {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: -0.035em;
+    margin-top: 20px;
+    color: #bdbdbd;
+  }
+
+  .chooseAFile {
+    margin: 21px auto 36px auto;
+    padding: 8px 16px;
+  }
+}

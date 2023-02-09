@@ -1,11 +1,17 @@
 FROM node:18.12.1-alpine
 
-WORKDIR /usr/app/frontend
+WORKDIR /app/frontend
 
-COPY . ./
+RUN npm install -g pnpm
 
-RUN npm install
+COPY pnpm-lock.yaml .
 
-RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+RUN pnpm fetch
 
-CMD [ "npm", "start" ]
+ADD . .
+
+RUN pnpm install -r --offline
+
+EXPOSE 5173
+
+CMD [ "pnpm", "dev" ]

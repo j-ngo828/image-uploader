@@ -1,9 +1,14 @@
 FROM python:3.10.8-alpine
 
+ENV PYTHONDONTWRITEBYTECODE=1
+
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /usr/app/backend
+WORKDIR /app/backend
 
-COPY . ./
+COPY . .
 
 RUN pip install -r requirements.txt
+
+EXPOSE 8000
+EXPOSE 5678

@@ -1,28 +1,24 @@
 services:
   backend:
     container_name: django-backend
-    command: sh -c "python manage.py migrate &&
-                    python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     build:
       context: ./backend/
       dockerfile: Dockerfile
-    expose:
-      - 8000
     ports:
-      - "8000:8000"
+      - 8000:8000
+      - 5678:5678
     volumes:
-      - ./backend:/usr/app/backend
+      - ./backend:/app/backend
 
   frontend:
     container_name: react-frontend
     build:
       context: ./frontend/
       dockerfile: Dockerfile
-    expose:
-      - 3000
     ports:
-      - "3000:3000"
+      - 3000:5173
     volumes:
-      - ./frontend:/usr/app/frontend
-      - /usr/app/frontend/node_modules/
-    stdin_open: true
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+      - /app/frontend/.pnpm-store

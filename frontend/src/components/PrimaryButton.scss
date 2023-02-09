@@ -1,15 +1,13 @@
-.uploadButton {
-  display: inline-flex;
+.primaryButton {
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 101px;
-  height: 31.98px;
+  border: none;
   background: #2f80ed;
   border-radius: 8px;
-
   font-family: "Noto Sans";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
   text-align: center;
@@ -17,8 +15,8 @@
 
   color: #ffffff;
   cursor: pointer;
-}
 
-.uploadButton:hover {
-  opacity: 0.5;
+  &:hover {
+    opacity: 0.5;
+  }
 }

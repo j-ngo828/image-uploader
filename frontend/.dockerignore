@@ -1,4 +1,4 @@
 .dockerignore
+Dockerfile
 .gitignore
 node_modules
-Dockerfile

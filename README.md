@@ -31,6 +31,9 @@
   - [Built With](#built-with)
 - [Features](#features)
 - [How To Use](#how-to-use)
+  - [Set up Dev Environment](#set-up-dev-environment)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
   - [Good-to-Know Commands](#good-to-know-commands)
 - [Common Issues](#common-issues)
 
@@ -38,7 +41,7 @@
 
 ## Overview
 
-![screenshot](https://github.com/j-ngo828/image-uploader/blob/docker-dev-environment/image-uploader-project.png?raw=true)
+![screenshot](https://github.com/j-ngo828/image-uploader/blob/main/image-uploader-project.png?raw=true)
 
 
 An application that allows user to upload image via drag and drop or manually selecting file from the filesystem.
@@ -72,7 +75,7 @@ To clone and run this application you'll need:
 Then on your terminal, run the following from the root of this repository:
 
 ```bash
-# Build the containers
+# Build the images and containers then run the containers
 docker compose up -d --build
 ```
 
@@ -81,11 +84,32 @@ Navigate to http://localhost:3000 to access the application.
 To stop the containers and to start the containers after the initial build:
 
 ```bash
-# For stopping all containers
-docker compose stop
+# For stopping and removing the containers created above
+docker compose down
 
-# For starting the container after the initial build
+# For creating and starting the container
+# after the initial build
 docker compose up -d
+```
+
+### Set up Dev Environment
+
+#### Backend
+
+Please follow the instructions for creating virtual environment and install dependencies in the Common Issues section below.
+
+#### Frontend
+
+If you're using VSCode, please download the recommended extensions and add the settings in `settings.json` for a better developer experience.
+
+You'll need:
+
+- [pnpm](https://pnpm.io/installation#using-npm): A faster Node.js package manager than `npm`
+
+Then run:
+
+```bash
+pnpm install
 ```
 
 ### Good-to-Know Commands
