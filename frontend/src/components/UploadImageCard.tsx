@@ -4,7 +4,7 @@ import LoadingCard from "@/components/LoadingCard";
 import PrimaryButton from "@/components/PrimaryButton";
 import SuccessfulUpload from "@/components/SuccessfulUpload";
 import "@/components/UploadImageCard.scss";
-import { baseUrl } from "@/constants";
+import { acceptedImageType, baseUrl } from "@/constants";
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
@@ -24,6 +24,18 @@ const getCookie = (name: String) => {
     }
   }
   return cookieValue;
+};
+
+const validateImageUploaded = (files: FileList | null) => {
+  if (!files || files.length !== 1) {
+    alert("Please input exactly one image");
+    return false;
+  }
+  if (!acceptedImageType.includes(files[0].type)) {
+    alert("Please upload png, jpeg, or jpg image only!");
+    return false;
+  }
+  return true;
 };
 
 function UploadImagePage(): JSX.Element {
@@ -53,7 +65,7 @@ function UploadImagePage(): JSX.Element {
       if (error instanceof Error) {
         errorMessage = error.message;
       }
-      console.log(errorMessage);
+      console.error(errorMessage);
     }
   };
 
@@ -79,11 +91,9 @@ function UploadImagePage(): JSX.Element {
       if (error instanceof Error) {
         errorMessage = error.message;
       }
-      console.log(errorMessage);
+      console.error(errorMessage);
     }
   };
-
-  // fetchImage(1);
 
   return isLoading ? (
     <LoadingCard />
@@ -98,7 +108,9 @@ function UploadImagePage(): JSX.Element {
         <React.Fragment>
           <div className="header">
             <h2 className="title">Upload your Image</h2>
-            <p className="helpText">File should be Jpeg, Png, ...</p>
+            <p className="helpText">
+              File should be in jpeg, jpg or png format.
+            </p>
           </div>
           <React.Fragment>
             <div
@@ -116,11 +128,11 @@ function UploadImagePage(): JSX.Element {
                 event.preventDefault();
                 setIsDragging(false);
                 const files = event.dataTransfer.files;
-                if (!files || files.length !== 1) {
-                  console.log("Please input exactly one image");
+                if (!validateImageUploaded(files)) {
                   return;
                 }
-                handleImageUpload(files[0]);
+                const image = files[0];
+                handleImageUpload(image);
               }}>
               <img
                 alt="Image upload drag and drop"
@@ -141,12 +153,11 @@ function UploadImagePage(): JSX.Element {
               ref={imageInput}
               onChange={(event) => {
                 const files = event.target.files;
-                if (!files || files.length !== 1) {
-                  console.log("Please input exactly one image");
+                if (!validateImageUploaded(files)) {
                   return;
                 }
-                const file = files[0];
-                handleImageUpload(file);
+                const image = files![0];
+                handleImageUpload(image);
               }}
               hidden
             />
