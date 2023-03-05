@@ -46,6 +46,11 @@
     border: 1px dashed #97bef4;
     border-radius: 12px;
 
+    img,
+    label {
+      pointer-events: none;
+    }
+
     img {
       width: 114.13px;
       height: 88.24px;
