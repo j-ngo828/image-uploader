@@ -6,7 +6,7 @@ import SuccessfulUpload from "@/components/SuccessfulUpload";
 import "@/components/UploadImageCard.scss";
 import { baseUrl } from "@/constants";
 import axios from "axios";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const imageApiRoute = `${baseUrl}/images/`;
 
@@ -29,16 +29,12 @@ const getCookie = (name: String) => {
 function UploadImagePage(): JSX.Element {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const imageInput = useRef<HTMLInputElement>(null);
 
-  const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (file: File) => {
     setIsLoading(true);
-    const inputFiles = event.target.files;
-    if (!inputFiles || inputFiles.length != 1) {
-      console.log("Please input exactly one image");
-      return;
-    }
-    const image = inputFiles[0];
+    const image = file;
     const formData = new FormData();
     try {
       formData.append("image", image, image.name);
@@ -51,7 +47,7 @@ function UploadImagePage(): JSX.Element {
       });
       const data = response.data;
       setImageUrl(data.image);
-      setTimeout(() => setIsLoading(false), 3500);
+      setTimeout(() => setIsLoading(false), 500);
     } catch (error) {
       let errorMessage = "Unknown Error";
       if (error instanceof Error) {
@@ -94,7 +90,10 @@ function UploadImagePage(): JSX.Element {
   ) : (
     <div className="imageUploader">
       {imageUrl ? (
-        <SuccessfulUpload checkmark={checkmark} imageUrl={imageUrl} />
+        <SuccessfulUpload
+          checkmark={checkmark}
+          imageUrl={imageUrl}
+        />
       ) : (
         <React.Fragment>
           <div className="header">
@@ -102,24 +101,53 @@ function UploadImagePage(): JSX.Element {
             <p className="helpText">File should be Jpeg, Png, ...</p>
           </div>
           <React.Fragment>
-            <div className="dragDropImage">
-              <input
-                type="image"
-                id="image"
+            <div
+              className={`${isDragging ? "dragging" : ""} dragDropImage`}
+              onDragEnter={(event) => {
+                event.stopPropagation();
+                setIsDragging(true);
+              }}
+              onDragLeave={(event) => {
+                event.stopPropagation();
+                setIsDragging(false);
+              }}
+              onDragOver={(event) => event.preventDefault()}
+              onDrop={(event) => {
+                event.preventDefault();
+                setIsDragging(false);
+                const files = event.dataTransfer.files;
+                if (!files || files.length !== 1) {
+                  console.log("Please input exactly one image");
+                  return;
+                }
+                handleImageUpload(files[0]);
+              }}>
+              <img
                 alt="Image upload drag and drop"
                 src={logo}
-              ></input>
-              <label className="promptText" htmlFor="image">
+              />
+              <label
+                className="promptText"
+                htmlFor="imageUpload">
                 Drag & Drop your image here
               </label>
             </div>
 
             <p className="optionText">Or</p>
             <input
+              id="imageUpload"
               type="file"
               accept="image/png, image/jpeg, image/jpg"
               ref={imageInput}
-              onChange={handleImageUpload}
+              onChange={(event) => {
+                const files = event.target.files;
+                if (!files || files.length !== 1) {
+                  console.log("Please input exactly one image");
+                  return;
+                }
+                const file = files[0];
+                handleImageUpload(file);
+              }}
               hidden
             />
             <PrimaryButton

@@ -35,15 +35,18 @@
     color: #828282;
   }
 
+  .dragging {
+    background: #f6f8fb;
+  }
+
   .dragDropImage {
     margin: 0 auto;
     width: 338px;
     height: 218.9px;
-    background: #f6f8fb;
     border: 1px dashed #97bef4;
     border-radius: 12px;
 
-    input {
+    img {
       width: 114.13px;
       height: 88.24px;
       margin: 0 auto;
