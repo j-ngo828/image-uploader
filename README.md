@@ -105,7 +105,7 @@ If you're using VSCode, please download the recommended extensions and add the s
 
 You'll need:
 
-- [pnpm](https://pnpm.io/installation#using-npm): A faster Node.js package manager than `npm`
+- [pnpm](https://pnpm.io/installation#using-npm): An alternative package manager to `npm`
 
 Then run:
 
@@ -115,24 +115,22 @@ pnpm install
 
 ### Good-to-Know Commands
 
-Since our backend server in containerized in Docker. To run Django administrative command such as `makemigrations`, do the following from your terminal:
+**Run command in a container**
+
+To run shell command in any of the two containers:
 
 ```bash
-docker exec -it django-backend sh -c "python manage.py {command}"
+docker compose exec <service-name> <command> <list-of-args>
+
+# Example: installing new pnpm package in the frontend container
+docker compose exec frontend pnpm install tailwindcss
+
+# Example: Make backend migrations
+docker compose exec backend python manage.py makemigrations
 ```
 
-You can add an alias to your shell:
+> We recommend creating alias(es) to shorten the above commands
 
-```bash
-alias dmd="docker exec -it django-backend sh -c"
-
-# Then just run management command with: dmd "{command}"
-
-## Example
-dmd "help" # list all possible management command
-```
-
-Alternatively, access the container `django-backend` from Docker Desktop and go to the terminal and run the command from there.
 
 ## Common Issues
 
