@@ -23,6 +23,18 @@ services:
       - frontend_node_modules:/app/frontend/node_modules
       - frontend_pnpm_store:/app/frontend/.pnpm-store
 
+  nginx:
+    image: nginx:1.23.3-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+      - ./backend/static:/opt/backend/static:ro
+      - ./backend/mediafiles:/opt/backend/mediafiles:ro
+    command: nginx -g 'daemon off;'
+
 volumes:
   frontend_node_modules:
   frontend_pnpm_store:

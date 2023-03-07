@@ -4,11 +4,9 @@ import LoadingCard from "@/components/LoadingCard";
 import PrimaryButton from "@/components/PrimaryButton";
 import SuccessfulUpload from "@/components/SuccessfulUpload";
 import "@/components/UploadImageCard.scss";
-import { acceptedImageType, baseUrl } from "@/constants";
+import { acceptedImageType, imageApiRoute } from "@/constants";
 import axios from "axios";
 import React, { useRef, useState } from "react";
-
-const imageApiRoute = `${baseUrl}/images/`;
 
 const getCookie = (name: String) => {
   let cookieValue = null;

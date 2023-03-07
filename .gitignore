@@ -3,4 +3,6 @@
 !.vscode/settings.json
 !.vscode/extensions.json
 env
-mediafiles/
+.env
+.dotenv
+certs
