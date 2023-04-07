@@ -4,13 +4,11 @@ import LoadingCard from "@/components/LoadingCard";
 import PrimaryButton from "@/components/PrimaryButton";
 import SuccessfulUpload from "@/components/SuccessfulUpload";
 import "@/components/UploadImageCard.scss";
-import { acceptedImageType } from "@/constants";
+import { acceptedImageType, imageApiRoute } from "@/constants";
 import { Image } from "@/types/imageUpload";
 import { getCookie } from "@/utils/apiUtils";
 import axios from "axios";
 import React, { useRef, useState } from "react";
-
-const imageApiRoute = `/api/images/`;
 
 const isValidImage = (files: FileList | null) => {
   if (!files || files.length !== 1) {

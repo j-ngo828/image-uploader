@@ -34,6 +34,7 @@
   - [Set up Dev Environment](#set-up-dev-environment)
     - [Backend](#backend)
     - [Frontend](#frontend)
+    - [Where to access the application](#where-to-access-the-application)
   - [Good-to-Know Commands](#good-to-know-commands)
 - [Common Issues](#common-issues)
 
@@ -97,6 +98,21 @@ docker compose up -d
 
 #### Backend
 
+You need to setup your host files to point the IP address of localhost to `dev.imageuploader.ca`. If you are using Linux/MacOS, find `/etc/hosts` and add the following to the file
+
+```bash
+127.0.0.1 dev.imageuploader.ca
+```
+
+
+You need to install `mkcerts` to generate self-signed SSL certificates for the dev environment https to work. Then run
+
+```bash
+cd certs
+mkcert dev.imageuploader.ca
+cd .. 
+```
+
 Please follow the instructions for creating virtual environment and install dependencies in the Common Issues section below.
 
 #### Frontend
@@ -112,6 +128,10 @@ Then run:
 ```bash
 pnpm install
 ```
+
+#### Where to access the application
+
+Navigate to https://dev.imageuploader.ca to access the development build of the app.
 
 ### Good-to-Know Commands
 

@@ -12,6 +12,4 @@ ADD . .
 
 RUN pnpm install -r --offline
 
-EXPOSE 5173
-
 CMD [ "pnpm", "dev" ]
