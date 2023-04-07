@@ -4,27 +4,15 @@ import LoadingCard from "@/components/LoadingCard";
 import PrimaryButton from "@/components/PrimaryButton";
 import SuccessfulUpload from "@/components/SuccessfulUpload";
 import "@/components/UploadImageCard.scss";
-import { acceptedImageType, imageApiRoute } from "@/constants";
+import { acceptedImageType } from "@/constants";
+import { Image } from "@/types/imageUpload";
+import { getCookie } from "@/utils/apiUtils";
 import axios from "axios";
 import React, { useRef, useState } from "react";
 
-const getCookie = (name: String) => {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== "") {
-    const cookies = document.cookie.split(";");
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) === name + "=") {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-};
+const imageApiRoute = `/api/images/`;
 
-const validateImageUploaded = (files: FileList | null) => {
+const isValidImage = (files: FileList | null) => {
   if (!files || files.length !== 1) {
     alert("Please input exactly one image");
     return false;
@@ -49,7 +37,7 @@ function UploadImagePage(): JSX.Element {
     try {
       formData.append("image", image, image.name);
       const csrfToken = getCookie("csrftoken");
-      const response = await axios.post(imageApiRoute, formData, {
+      const response = await axios.post<Image>(imageApiRoute, formData, {
         headers: {
           "Content-type": "multipart/form-data",
           "X-CSRFToken": csrfToken,
@@ -126,7 +114,7 @@ function UploadImagePage(): JSX.Element {
                 event.preventDefault();
                 setIsDragging(false);
                 const files = event.dataTransfer.files;
-                if (!validateImageUploaded(files)) {
+                if (!isValidImage(files)) {
                   return;
                 }
                 const image = files[0];
@@ -151,7 +139,7 @@ function UploadImagePage(): JSX.Element {
               ref={imageInput}
               onChange={(event) => {
                 const files = event.target.files;
-                if (!validateImageUploaded(files)) {
+                if (!isValidImage(files)) {
                   return;
                 }
                 const image = files![0];
