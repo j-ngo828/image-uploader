@@ -2,26 +2,6 @@
 
 <h1 align="center">Image Uploader</h1>
 
-<div align="center">
-   Solution for Image Uploader from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
-</div>
-
-<div align="center">
-  <h3>
-    <a href="https://{your-demo-link.your-domain}" target="_blank">
-      Demo
-    </a>
-    <span> | </span>
-    <a href="https://{your-url-to-the-solution}" target="_blank">
-      Solution
-    </a>
-    <span> | </span>
-    <a href="https://devchallenges.io/challenges/O2iGT9yBd6xZBrOcVirx" target="_blank">
-      Challenge
-    </a>
-  </h3>
-</div>
-
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
@@ -148,3 +128,9 @@ pip install -r backend/requirements.txt
 Then select the interpreter in `env/bin/`. The issue should disappears.
 
 Note: We assumed you're using MacOS or Linux. For Windows, please find the corresponding command for setting up Python virtual environment.
+
+## Credits
+
+<div align="center">
+   Solution for Image Uploader from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
+</div>
